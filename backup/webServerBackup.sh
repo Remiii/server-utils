@@ -34,6 +34,9 @@ function BACKUP_BDD()
     # Dump PHP conf
     tar -czf /${PWD_BACKUP}/${MY_DAY}_etc_php.tar.gz /etc/php5
     rm /${PWD_BACKUP}/${MY_OLD_DAY}_etc_php.tar.gz
+    # Dump Cron list
+    crontab -l > /${PWD_BACKUP}/${MY_DAY}_cron.txt
+    rm /${PWD_BACKUP}/${MY_OLD_DAY}_cron.txt
 }
 
 function BACKUP_FTP()
@@ -53,6 +56,8 @@ function BACKUP_FTP()
     delete ${MY_OLD_DAY}_etc_apache2.tar.gz
     put ${MY_DAY}_etc_php.tar.gz
     delete ${MY_OLD_DAY}_etc_php.tar.gz
+    put ${MY_DAY}_cron.txt
+    delete ${MY_OLD_DAY}_cron.txt
     bye
 EOF
 }
